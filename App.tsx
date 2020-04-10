@@ -1,14 +1,12 @@
 import React from 'react';
-import {
-  StatusBar
-} from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { Home } from './src/components/home'
+import { Home } from './src/components/home';
 
-declare var global: {HermesInternal: null | {}};
+declare var global: { HermesInternal: null | {} };
 
 const Stack = createStackNavigator();
 
