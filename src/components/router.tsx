@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ComponentType, FunctionComponent } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
 export type IRoute = {
 	name: string;
-	component: JSX.Element;
+	component: ComponentType<any> | FunctionComponent<any>;
 	options?: {
 		title?: string;
 		drawerLabel?: string;
@@ -17,7 +17,7 @@ type OwnProps = {
 };
 
 export const Router = ({ routes }: OwnProps) => (
-	<Drawer.Navigator initialRouteName={routes[0]}>
+	<Drawer.Navigator initialRouteName={routes[0].name}>
 		{routes.map(({ name, component, options }: IRoute) => (
 			<Drawer.Screen
 				name={name}
