@@ -21,8 +21,8 @@ export const DrawerComponent = ({ routes }: OwnProps) => (
 	<Drawer.Navigator
 		initialRouteName={routes[0].name}
 		drawerContent={
-			() => (
-				<CitiesSelector />
+			({ navigation }) => (
+				<CitiesSelector navigation={navigation} />
 			) /* this was necesary to allow the use of hooks within drawerContent*/
 		}>
 		{routes.map(({ name, component, options }: IRoute) => (
