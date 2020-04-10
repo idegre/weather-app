@@ -1,5 +1,6 @@
 import React, { ComponentType, FunctionComponent } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { CitiesSelector } from './citiesSelector';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,8 +17,14 @@ type OwnProps = {
 	routes: IRoute[];
 };
 
-export const Router = ({ routes }: OwnProps) => (
-	<Drawer.Navigator initialRouteName={routes[0].name}>
+export const DrawerComponent = ({ routes }: OwnProps) => (
+	<Drawer.Navigator
+		initialRouteName={routes[0].name}
+		drawerContent={
+			() => (
+				<CitiesSelector />
+			) /* this was necesary to allow the use of hooks within drawerContent*/
+		}>
 		{routes.map(({ name, component, options }: IRoute) => (
 			<Drawer.Screen
 				name={name}

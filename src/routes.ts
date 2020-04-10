@@ -1,4 +1,4 @@
-import { IRoute } from './components/router';
+import { IRoute } from './components/drawer';
 import { Home } from './components/home';
 
 export const routes: IRoute[] = [
