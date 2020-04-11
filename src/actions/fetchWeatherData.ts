@@ -4,8 +4,9 @@ import { RootState } from 'combineReducers';
 import { RootActions } from 'combineActions';
 import * as actionTypes from '../actionTypes';
 import { IWData } from 'src/interfaces/weatherData';
+import { OPENWEATHER_API_KEY, DEFAULT_CITY } from 'react-native-dotenv';
 
-const apiKey = '29f1ca0d25a38880d3618fa0ccb61bbb';
+const apiKey = OPENWEATHER_API_KEY;
 
 const fetchDataSuccess = (data: IWData, name: string) => ({
 	type: actionTypes.FETCH_WEATHER_SUCCESS,
@@ -26,7 +27,7 @@ const fetchDataFailure = (error: AxiosError, name: string) => ({
 });
 
 export const fetchWeatherData = (
-	cityName: string,
+	cityName: string = DEFAULT_CITY,
 ): ThunkAction<
 	Promise<IWData | undefined>,
 	RootState,
@@ -36,7 +37,6 @@ export const fetchWeatherData = (
 	try {
 		const cancelToken = axios.CancelToken.source();
 		dispatch(fetchDataRequest(cancelToken, cityName));
-		console.log('fetching', cityName);
 		const { data } = await axios.get<IWData>(
 			'http://api.openweathermap.org/data/2.5/weather',
 			{
@@ -47,7 +47,6 @@ export const fetchWeatherData = (
 				},
 			},
 		);
-		console.log(data);
 		dispatch(fetchDataSuccess(data, cityName));
 		return data;
 	} catch (e) {

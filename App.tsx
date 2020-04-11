@@ -5,16 +5,19 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { routes } from './src/routes';
 import { DrawerComponent } from './src/components/drawer';
+import { ThemeProvider } from 'react-native-elements';
 
 declare var global: { HermesInternal: null | {} };
 
 const App = () => {
 	return (
 		<Provider store={store}>
-			<StatusBar barStyle="dark-content" />
-			<NavigationContainer>
-				<DrawerComponent routes={routes} />
-			</NavigationContainer>
+			<ThemeProvider>
+				<StatusBar barStyle="dark-content" />
+				<NavigationContainer>
+					<DrawerComponent routes={routes} />
+				</NavigationContainer>
+			</ThemeProvider>
 		</Provider>
 	);
 };

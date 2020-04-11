@@ -17,24 +17,26 @@ type OwnProps = {
 	routes: IRoute[];
 };
 
-export const DrawerComponent = ({ routes }: OwnProps) => (
-	<Drawer.Navigator
-		initialRouteName={routes[0].name}
-		drawerContent={
-			({ navigation }) => (
-				<CitiesSelector navigation={navigation} />
-			) /* this was necesary to allow the use of hooks within drawerContent*/
-		}>
-		{routes.map(({ name, component, options }: IRoute) => (
-			<Drawer.Screen
-				name={name}
-				key={name}
-				component={component}
-				options={{
-					drawerLabel: name,
-					...options,
-				}}
-			/>
-		))}
-	</Drawer.Navigator>
-);
+export const DrawerComponent = ({ routes }: OwnProps) => {
+	return (
+		<Drawer.Navigator
+			initialRouteName={routes[0].name}
+			drawerContent={
+				({ navigation }) => (
+					<CitiesSelector navigation={navigation} />
+				) /* this was necesary to allow the use of hooks within drawerContent*/
+			}>
+			{routes.map(({ name, component, options }: IRoute) => (
+				<Drawer.Screen
+					name={name}
+					key={name}
+					component={component}
+					options={{
+						drawerLabel: name,
+						...options,
+					}}
+				/>
+			))}
+		</Drawer.Navigator>
+	);
+};
