@@ -2,9 +2,14 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { DEFAULT_CITY } from 'react-native-dotenv';
 import { Icon } from 'react-native-elements';
+import { NavigationHelpers, DrawerActions } from '@react-navigation/native';
+import { DrawerNavigationEventMap } from '@react-navigation/drawer/lib/typescript/src/types';
 
 type OwnProps = {
-	navigation: any;
+	navigation: NavigationHelpers<
+		Record<string, object | undefined>,
+		DrawerNavigationEventMap
+	>;
 	title: string;
 };
 
@@ -12,12 +17,12 @@ export const Header = ({ title = DEFAULT_CITY, navigation }: OwnProps) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>{title}</Text>
-			<Icon
-				style={styles.icon}
-				name="bars"
-				type="material"
-				onPress={() => navigation.openDrawer()}
-			/>
+			<View style={styles.icon}>
+				<Icon
+					name="menu"
+					onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -29,6 +34,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderBottomColor: '#ccc',
 		borderBottomWidth: 1,
+		position: 'relative',
 	},
 	title: {
 		fontSize: 25,
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		position: 'absolute',
+		top: 15,
 		left: 10,
-		top: 10,
 	},
 });

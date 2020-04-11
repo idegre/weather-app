@@ -1,6 +1,8 @@
-import React, { ComponentType, FunctionComponent } from 'react';
+import React, { ComponentType, FunctionComponent, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CitiesSelector } from './citiesSelector';
+import { useDispatch } from 'react-redux';
+import { recoverList } from '../actions/recoverList';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +20,10 @@ type OwnProps = {
 };
 
 export const DrawerComponent = ({ routes }: OwnProps) => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(recoverList());
+	}, []);
 	return (
 		<Drawer.Navigator
 			initialRouteName={routes[0].name}
