@@ -8,23 +8,23 @@ import { Data } from './data';
 
 export const Home = () => {
 	const currentCity = useSelector(({ cities: { list } }: RootState) => list[0]);
-	const { data, isFetching } = useSelector(
+	const { wData, dataIsFetching } = useSelector(
 		({ weatherData: { data, isFetching } }: RootState) => ({
-			data,
-			isFetching,
+			wData: data,
+			dataIsFetching: isFetching,
 		}),
 	);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchWeatherData(currentCity));
 	}, [currentCity]);
-	return isFetching ? (
+	return dataIsFetching ? (
 		<Text>loading...</Text>
 	) : (
 		<View>
 			<Text>{currentCity}</Text>
 			{/* <MapView /> */}
-			{!!data && <Data data={data.main} />}
+			{!!wData && <Data data={wData.main} />}
 		</View>
 	);
 };
