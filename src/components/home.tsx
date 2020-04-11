@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../combineReducers';
+import { fetchWeatherData } from '../actions/fetchWeatherData';
 
 export const Home = () => {
 	const currentCity = useSelector(({ cities: { list } }: RootState) => list[0]);
-	useEffect(() => console.log('changed city', currentCity), [currentCity]);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchWeatherData(currentCity));
+	}, [currentCity]);
 	return (
 		<View>
 			<Text>{currentCity}</Text>
