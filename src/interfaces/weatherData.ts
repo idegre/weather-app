@@ -1,3 +1,11 @@
+export type IMainData = {
+	temp: number;
+	pressure: number;
+	humidity: number;
+	temp_min: number;
+	temp_max: number;
+};
+
 export type IWData = {
 	coord: {
 		lon: number;
@@ -10,13 +18,7 @@ export type IWData = {
 		icon: string;
 	}[];
 	base: string;
-	main: {
-		temp: number;
-		pressure: number;
-		humidity: number;
-		temp_min: number;
-		temp_max: number;
-	};
+	main: IMainData;
 	visibility: number;
 	wind: {
 		speed: number;
