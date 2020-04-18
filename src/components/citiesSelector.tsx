@@ -33,7 +33,7 @@ export const CitiesSelector = ({ navigation }: OwnProps) => {
 				placeholder="Find your city"
 			/>
 			<View>
-				<Text>Previously searched cities:</Text>
+				<Text style={styles.listHeader}>Previously searched cities:</Text>
 				{citiesList.map((city: string) => (
 					<TouchableHighlight key={city} onPress={handleSetCity(city)}>
 						<Text style={styles.listItem}>{city}</Text>
@@ -57,5 +57,10 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderTopColor: '#ccc',
 		borderTopWidth: 1,
+	},
+	listHeader: {
+		padding: 10,
+		fontSize: 15,
+		fontWeight: '600',
 	},
 });

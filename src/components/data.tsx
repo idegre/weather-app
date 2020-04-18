@@ -1,18 +1,20 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { IMainData } from 'src/interfaces/weatherData';
 import { DataPoint } from './dataPoint';
 
 type OwnProps = {
 	data: IMainData;
+	style?: StyleProp<ViewStyle>;
 };
 
 export const Data = ({
 	data: { temp, humidity, temp_max, temp_min, pressure },
+	style,
 }: OwnProps) => {
 	return (
 		<>
-			<View style={styles.container}>
+			<View style={{ ...styles.container, ...style }}>
 				<Text style={styles.mainTemp}>{(temp - 273.15).toFixed(2)}C*</Text>
 				<View>
 					<DataPoint
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		justifyContent: 'space-around',
 		marginTop: 10,
+		marginBottom: 10,
 	},
 	mainTemp: {
 		fontSize: 70,
