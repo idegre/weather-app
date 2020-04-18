@@ -25,7 +25,6 @@ export const Home = ({ navigation }: OwnProps) => {
 			apiError: error,
 		}),
 	);
-	console.log(wData, dataIsFetching, apiError);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchWeatherData(currentCity));
