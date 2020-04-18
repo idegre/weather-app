@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { IMainData } from 'src/interfaces/weatherData';
 import { DataPoint } from './dataPoint';
+import { cToK } from '../helpers/tempConversion';
 
 type OwnProps = {
 	data: IMainData;
@@ -15,16 +16,10 @@ export const Data = ({
 	return (
 		<>
 			<View style={{ ...styles.container, ...style }}>
-				<Text style={styles.mainTemp}>{(temp - 273.15).toFixed(2)}C*</Text>
+				<Text style={styles.mainTemp}>{cToK(temp)}C*</Text>
 				<View>
-					<DataPoint
-						data={`${(temp_max - 273.15).toFixed(1)}C*`}
-						label="Max Texperature"
-					/>
-					<DataPoint
-						data={`${(temp_min - 273.15).toFixed(1)}C*`}
-						label="Min Texperature"
-					/>
+					<DataPoint data={`${cToK(temp_max, 1)}C*`} label="Max Texperature" />
+					<DataPoint data={`${cToK(temp_min, 1)}C*`} label="Min Texperature" />
 				</View>
 			</View>
 			<View style={styles.subContainer}>
