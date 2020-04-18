@@ -14,7 +14,7 @@ export const recoverList = (): ThunkAction<
 		const unparsed = await AsyncStorage.getItem('CITY_LIST');
 		dispatch(setCity(JSON.parse(unparsed || '')));
 	} catch (e) {
-		Promise.reject();
+		return Promise.reject();
 	}
 };
 

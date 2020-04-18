@@ -28,12 +28,10 @@ const fetchDataFailure = (error: AxiosError, name: string) => ({
 
 export const fetchWeatherData = (
 	cityName: string = DEFAULT_CITY,
-): ThunkAction<
-	Promise<IWData | undefined>,
-	RootState,
-	void,
-	RootActions
-> => async (dispatch, _) => {
+): ThunkAction<Promise<IWData>, RootState, void, RootActions> => async (
+	dispatch,
+	_,
+) => {
 	try {
 		const cancelToken = axios.CancelToken.source();
 		dispatch(fetchDataRequest(cancelToken, cityName));
@@ -51,7 +49,7 @@ export const fetchWeatherData = (
 		return data;
 	} catch (e) {
 		dispatch(fetchDataFailure(e, cityName));
-		Promise.reject();
+		return Promise.reject();
 	}
 };
 

@@ -25,6 +25,7 @@ export const Home = ({ navigation }: OwnProps) => {
 			apiError: error,
 		}),
 	);
+	console.log(wData, dataIsFetching, apiError);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchWeatherData(currentCity));
@@ -32,9 +33,13 @@ export const Home = ({ navigation }: OwnProps) => {
 	return (
 		<View style={styles.container}>
 			<Header title={currentCity} navigation={navigation} />
-			{!dataIsFetching && !!wData ? (
-				!wData || apiError ? (
-					<Text>There was an error, please try again</Text>
+			{!dataIsFetching ? (
+				apiError && !wData ? (
+					<Text>
+						{apiError.response.status === 404
+							? 'The city could not be found'
+							: 'There was an error, please try again'}
+					</Text>
 				) : (
 					<View pointerEvents="none" style={styles.dataContainer}>
 						<MapView
